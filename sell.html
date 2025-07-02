@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastic Wallah - Sell Plastic</title>
+    <style>
+        /* Body Styling */
+        body {
+            background-color: #7fb282;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #7fb282;
+            padding: 15px;
+            text-align: right;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #162e10;
+            text-decoration: underline;
+        }
+
+        /* Main White Section */
+        .white-container {
+            background-color: white;
+            margin: 40px auto;
+            width: 80%;
+            border-radius: 30px;
+            box-shadow: 5px 10px 5px rgb(39, 39, 39);
+            padding: 40px;
+        }
+
+        h1 {
+            color: rgb(45, 82, 48);
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        .sell-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #18391e;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            background-color: #f5f5f5;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #87daa1;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .preview-card {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sell-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            
+            h1 {
+                font-size: 40px;
+            }
+        }
+
+        /* Image Upload Styling */
+        .image-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            height: 150px;
+            grid-column: span 2;
+        }
+
+        .image-upload:hover {
+            border-color: #18391e;
+            background-color: #f0f0f0;
+        }
+
+        .image-upload i {
+            font-size: 40px;
+            color: #18391e;
+            margin-bottom: 10px;
+        }
+
+        .image-upload p {
+            color: #666;
+            text-align: center;
+        }
+
+        #imagePreview {
+            display: none;
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="buy.html">BUY</a>
+        <a href="sell.html">SELL</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="white-container">
+        <h1>SELL PLASTIC WASTE</h1>
+        
+        <form id="sellForm" class="sell-form">
+            <!-- Left Column -->
+            <div class="form-group">
+                <label for="plasticType">Plastic Type</label>
+                <select id="plasticType" required>
+                    <option value="">Select type</option>
+                    <option value="PET">PET (Polyethylene Terephthalate)</option>
+                    <option value="HDPE">HDPE (High-Density Polyethylene)</option>
+                    <option value="PVC">PVC (Polyvinyl Chloride)</option>
+                    <option value="LDPE">LDPE (Low-Density Polyethylene)</option>
+                    <option value="PP">PP (Polypropylene)</option>
+                    <option value="PS">PS (Polystyrene)</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity (kg)</label>
+                <input type="number" id="quantity" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Price per kg (₹)</label>
+                <input type="number" id="price" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Your Location</label>
+                <select id="location" required>
+                    <option value="">Select location</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="form-group">
+                <label for="contactName">Contact Name</label>
+                <input type="text" id="contactName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contactPhone">Contact Phone</label>
+                <input type="tel" id="contactPhone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contactEmail">Contact Email</label>
+                <input type="email" id="contactEmail">
+            </div>
+            
+            <!-- Image Upload (now at the bottom) -->
+            <div class="image-upload" id="imageUpload">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Click to upload image of your plastic waste</p>
+                <img id="imagePreview" alt="Preview">
+            </div>
+            <input type="file" id="plasticImage" accept="image/*" style="display: none;">
+            
+            <!-- Submit Button -->
+            <div class="form-group full-width">
+                <button type="submit" class="btn">LIST MY PLASTIC WASTE</button>
+            </div>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+            <h3>Your plastic waste has been listed successfully!</h3>
+            <p>Buyers will now be able to see your listing and contact you.</p>
+        </div>
+        
+        <div class="preview-section">
+            <h2>Your Listing Preview</h2>
+            <div class="preview-card" id="listingPreview">
+                <div class="preview-image" id="previewImage"></div>
+                <h3 id="previewTitle">Your Plastic Type</h3>
+                <p><strong>Quantity:</strong> <span id="previewQuantity">0</span> kg</p>
+                <p><strong>Price:</strong> ₹<span id="previewPrice">0</span> per kg</p>
+                <p><strong>Location:</strong> <span id="previewLocation">Not specified</span></p>
+                <p><strong>Contact:</strong> <span id="previewContact">Not specified</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const sellForm = document.getElementById('sellForm');
+        const imageUpload = document.getElementById('imageUpload');
+        const plasticImage = document.getElementById('plasticImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImage = document.getElementById('previewImage');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewQuantity = document.getElementById('previewQuantity');
+        const previewPrice = document.getElementById('previewPrice');
+        const previewLocation = document.getElementById('previewLocation');
+        const previewContact = document.getElementById('previewContact');
+        const successMessage = document.getElementById('successMessage');
+
+        // Image Upload Handling
+        imageUpload.addEventListener('click', () => {
+            plasticImage.click();
+        });
+
+        plasticImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+                    imagePreview.style.display = 'block';
+                    imageUpload.querySelector('i').style.display = 'none';
+                    imageUpload.querySelector('p').style.display = 'none';
+                    
+                    // Update preview
+                    previewImage.style.backgroundImage = `url('${event.target.result}')`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form Input Handling
+        const formInputs = document.querySelectorAll('#sellForm input, #sellForm select');
+        formInputs.forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
+        function updatePreview() {
+            // Update preview with form values
+            const plasticType = document.getElementById('plasticType').value || 'Your Plastic Type';
+            const quantity = document.getElementById('quantity').value || '0';
+            const price = document.getElementById('price').value || '0';
+            const location = document.getElementById('location').value || 'Not specified';
+            const contactName = document.getElementById('contactName').value || 'Not specified';
+            
+            previewTitle.textContent = plasticType;
+            previewQuantity.textContent = quantity;
+            previewPrice.textContent = price;
+            previewLocation.textContent = location;
+            previewContact.textContent = contactName;
+        }
+
+        // Form Submission
+        sellForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            const plasticType = document.getElementById('plasticType').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+            const location = document.getElementById('location').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            
+            if (!plasticType || !quantity || !price || !location || !contactName || !contactPhone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // In a real app, this would send data to a server
+            // For now, we'll just show a success message
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                sellForm.reset();
+                imagePreview.src = '';
+                imagePreview.style.display = 'none';
+                imageUpload.querySelector('i').style.display = 'block';
+                imageUpload.querySelector('p').style.display = 'block';
+                previewImage.style.backgroundImage = 'none';
+                updatePreview();
+            }, 3000);
+        });
+
+        // Initialize preview
+        updatePreview();
+    </script>
+</body>
+</html>

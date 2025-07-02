@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastic Wallah - Buy Plastic</title>
+    <style>
+        /* Body Styling */
+        body {
+            background-color: #7fb282;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #7fb282;
+            padding: 15px;
+            text-align: right;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #162e10;
+            text-decoration: underline;
+        }
+
+        /* Main White Section */
+        .white {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 450px;
+            background-color: white;
+            margin-left: 90px;
+            width: 80%;
+            border-radius: 30px;
+            box-shadow: 5px 10px 5px rgb(39, 39, 39);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Left Side: Text */
+        .text-section {
+            width: 50%;
+        }
+
+        h1 {
+            color: rgb(45, 82, 48);
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .button-container {
+            margin-bottom: 50px;
+            z-index: 100;
+        }
+
+        .btn {
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #87daa1;
+        }
+
+        /* Right Side: Image */
+        .right-image {
+            width: 50%;
+        }
+
+        .right-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* Bottom Left Image */
+        .image {
+            position: absolute;
+            bottom: -40px;
+            width: 320px;
+            z-index: 2;
+        }
+
+        /* Buy Page Styles */
+        .buy-container {
+            background-color: white;
+            margin: 40px auto;
+            width: 80%;
+            border-radius: 30px;
+            box-shadow: 5px 10px 5px rgb(39, 39, 39);
+            padding: 40px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filters select, .filters input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            background-color: #f5f5f5;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: #18391e;
+        }
+
+        .product-info p {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            background-color: #e0e0e0;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .add-to-cart {
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2e7d32;
+        }
+
+        .cart-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e53935;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #e53935;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            text-align: right;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .checkout-btn {
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .checkout-btn:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="BUY.html">BUY</a>
+        <a href="SELL.html">SELL</a>
+    </nav>
+
+    <!-- Buy Container -->
+    <div class="buy-container">
+        <h1 style="color: #18391e;">Available Plastic Waste</h1>
+        
+        <div class="filters">
+            <select id="plasticTypeFilter">
+                <option value="all">All Types</option>
+                <option value="PET">PET</option>
+                <option value="HDPE">HDPE</option>
+                <option value="PVC">PVC</option>
+                <option value="LDPE">LDPE</option>
+                <option value="PP">PP</option>
+                <option value="PS">PS</option>
+            </select>
+            
+            <select id="locationFilter">
+                <option value="all">All Locations</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+            </select>
+            
+            <select id="sortFilter">
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="quantity-desc">Quantity: High to Low</option>
+            </select>
+        </div>
+        
+        <div class="products-grid" id="productsContainer">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Cart Button -->
+    <button class="cart-btn" id="cartBtn">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-summary">
+                <p>Total Quantity: <span id="totalQuantity">0</span> kg</p>
+                <p>Total Price: ₹<span id="totalPrice">0</span></p>
+                <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for plastic waste products
+        const products = [
+            {
+                id: 1,
+                type: 'PET',
+                name: 'Clear PET Bottles',
+                description: 'Clean, sorted PET bottles ready for recycling',
+                price: 15,
+                quantity: 500,
+                location: 'Mumbai',
+                image: 'pet.jpg'
+            },
+            {
+                id: 2,
+                type: 'HDPE',
+                name: 'HDPE Containers',
+                description: 'Mixed color HDPE containers, cleaned and baled',
+                price: 12,
+                quantity: 300,
+                location: 'Delhi',
+                image: 'hdpe2.png'
+            },
+            {
+                id: 3,
+                type: 'PP',
+                name: 'Polypropylene Bags',
+                description: 'Used PP bags in good condition for recycling',
+                price: 10,
+                quantity: 800,
+                location: 'Bangalore',
+                image: 'pp.png'
+            },
+            {
+                id: 4,
+                type: 'LDPE',
+                name: 'LDPE Film Scrap',
+                description: 'Clean LDPE film scrap from packaging',
+                price: 8,
+                quantity: 400,
+                location: 'Chennai',
+                image: 'ldpe.png'
+            },
+            {
+                id: 5,
+                type: 'PS',
+                name: 'Polystyrene Packaging',
+                description: 'PS foam packaging material for recycling',
+                price: 7,
+                quantity: 200,
+                location: 'Hyderabad',
+                image: 'ps.png'
+            },
+            {
+                id: 6,
+                type: 'PVC',
+                name: 'PVC Pipes Scrap',
+                description: 'Clean PVC pipe cuttings, sorted by color',
+                price: 9,
+                quantity: 350,
+                location: 'Pune',
+                image: 'pvc.png'
+            }
+        ];
+
+        // Cart data
+        let cart = [];
+
+        // DOM Elements
+        const productsContainer = document.getElementById('productsContainer');
+        const plasticTypeFilter = document.getElementById('plasticTypeFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const sortFilter = document.getElementById('sortFilter');
+        const cartBtn = document.getElementById('cartBtn');
+        const cartCount = document.getElementById('cartCount');
+        const cartModal = document.getElementById('cartModal');
+        const closeModal = document.querySelector('.close');
+        const cartItems = document.getElementById('cartItems');
+        const totalQuantity = document.getElementById('totalQuantity');
+        const totalPrice = document.getElementById('totalPrice');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            
+            // Check for cart in localStorage
+            if(localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
+                updateCartCount();
+            }
+        });
+
+        // Event Listeners
+        plasticTypeFilter.addEventListener('change', filterProducts);
+        locationFilter.addEventListener('change', filterProducts);
+        sortFilter.addEventListener('change', filterProducts);
+
+        cartBtn.addEventListener('click', () => {
+            if(cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+            renderCart();
+            cartModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+
+        checkoutBtn.addEventListener('click', () => {
+            if(cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+            
+            // In a real app, this would process payment
+            alert(`Order placed successfully!\nTotal: ₹${calculateTotalPrice()}\nThank you for your purchase!`);
+            
+            // Clear cart
+            cart = [];
+            localStorage.removeItem('cart');
+            updateCartCount();
+            cartModal.classList.remove('active');
+            renderProducts(products);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if(e.target === cartModal) {
+                cartModal.classList.remove('active');
+            }
+        });
+
+        // Functions
+        function renderProducts(productsToRender) {
+            productsContainer.innerHTML = '';
+            
+            if(productsToRender.length === 0) {
+                productsContainer.innerHTML = '<p class="no-products">No products found matching your criteria.</p>';
+                return;
+            }
+            
+            productsToRender.forEach(product => {
+                const productEl = document.createElement('div');
+                productEl.className = 'product-card';
+                productEl.innerHTML = `
+                    <div class="product-image" style="background-image: url('${product.image}')"></div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p><strong>Type:</strong> ${product.type}</p>
+                        <p><strong>Location:</strong> ${product.location}</p>
+                        <p><strong>Available:</strong> ${product.quantity}kg</p>
+                        <p class="product-price">₹${product.price}/kg</p>
+                        <div class="product-actions">
+                            <div class="quantity-control">
+                                <button class="decrement" data-id="${product.id}">-</button>
+                                <input type="number" class="quantity" value="1" min="1" max="${product.quantity}" data-id="${product.id}">
+                                <button class="increment" data-id="${product.id}">+</button>
+                            </div>
+                            <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productEl);
+            });
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', addToCart);
+            });
+            
+            document.querySelectorAll('.increment').forEach(btn => {
+                btn.addEventListener('click', incrementQuantity);
+            });
+            
+            document.querySelectorAll('.decrement').forEach(btn => {
+                btn.addEventListener('click', decrementQuantity);
+            });
+            
+            document.querySelectorAll('.quantity').forEach(input => {
+                input.addEventListener('change', updateQuantity);
+            });
+        }
+
+        function filterProducts() {
+            const type = plasticTypeFilter.value;
+            const location = locationFilter.value;
+            const sort = sortFilter.value;
+            
+            let filteredProducts = [...products];
+            
+            // Filter by type
+            if(type !== 'all') {
+                filteredProducts = filteredProducts.filter(p => p.type === type);
+            }
+            
+            // Filter by location
+            if(location !== 'all') {
+                filteredProducts = filteredProducts.filter(p => p.location === location);
+            }
+            
+            // Sort products
+            if(sort === 'price-asc') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if(sort === 'price-desc') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            } else if(sort === 'quantity-desc') {
+                filteredProducts.sort((a, b) => b.quantity - a.quantity);
+            }
+            
+            renderProducts(filteredProducts);
+        }
+
+        function addToCart(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            const quantityInput = e.target.parentElement.querySelector('.quantity');
+            const quantity = parseInt(quantityInput.value);
+            
+            if(quantity > product.quantity) {
+                alert(`Only ${product.quantity}kg available`);
+                return;
+            }
+            
+            // Check if already in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if(existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: quantity,
+                    type: product.type
+                });
+            }
+            
+            // Update localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update UI
+            updateCartCount();
+            alert(`${quantity}kg of ${product.name} added to cart!`);
+        }
+
+        function renderCart() {
+            cartItems.innerHTML = '';
+            
+            if(cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const cartItemEl = document.createElement('div');
+                cartItemEl.className = 'cart-item';
+                cartItemEl.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name} (${item.type})</h4>
+                        <p>₹${item.price}/kg × ${item.quantity}kg = ₹${item.price * item.quantity}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="remove-item" data-id="${item.id}">Remove</button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItemEl);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', removeFromCart);
+            });
+            
+            // Update totals
+            updateCartTotals();
+        }
+
+        function removeFromCart(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            
+            if(itemIndex !== -1) {
+                cart.splice(itemIndex, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        function updateCartCount() {
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = itemCount;
+        }
+
+        function updateCartTotals() {
+            const totalKg = cart.reduce((total, item) => total + item.quantity, 0);
+            const total = calculateTotalPrice();
+            
+            totalQuantity.textContent = totalKg;
+            totalPrice.textContent = total;
+        }
+
+        function calculateTotalPrice() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        function incrementQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const quantityInput = e.target.parentElement.querySelector('.quantity');
+            const max = parseInt(quantityInput.getAttribute('max'));
+            
+            let newValue = parseInt(quantityInput.value) + 1;
+            if(newValue > max) newValue = max;
+            quantityInput.value = newValue;
+        }
+
+        function decrementQuantity(e) {
+            const quantityInput = e.target.parentElement.querySelector('.quantity');
+            let newValue = parseInt(quantityInput.value) - 1;
+            if(newValue < 1) newValue = 1;
+            quantityInput.value = newValue;
+        }
+
+        function updateQuantity(e) {
+            const max = parseInt(e.target.getAttribute('max'));
+            let value = parseInt(e.target.value);
+            
+            if(isNaN(value) || value < 1) {
+                e.target.value = 1;
+            } else if(value > max) {
+                e.target.value = max;
+            }
+        }
+    </script>
+</body>
+</html>

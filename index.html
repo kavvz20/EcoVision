@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Plastic Wallah</title>
+    <style>
+        /* Body Styling */
+        body {
+            background-color: #7fb282;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #7fb282;
+            padding: 15px;
+            text-align: right;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #162e10;
+            text-decoration: underline;
+        }
+
+        /* Main White Section */
+        .white {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 450px;
+            background-color: white;
+            margin-left: 90px;
+            width: 80%;
+            border-radius: 30px;
+            box-shadow: 5px 10px 5px rgb(39, 39, 39);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Left Side: Text */
+        .text-section {
+            width: 50%;
+        }
+
+        h1 {
+            color: rgb(45, 82, 48);
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .button-container {
+            margin-bottom: 50px;
+            z-index: 100;
+        }
+
+        .btn {
+            background-color: #18391e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+            
+        }
+
+        .btn:hover {
+            background-color: #87daa1;
+        }
+
+        /* Right Side: Image */
+        .right-image {
+            width: 50%;
+        }
+
+        .right-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* Bottom Left Image */
+        .image {
+            position: absolute;
+            bottom: -40px;
+            
+            width: 320px;
+            
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        
+    </nav>
+
+    <!-- Bottom Left Image -->
+    <div class="plastic">
+        <img src="plas.png" alt="plas" class="image">
+    </div>
+
+    <!-- White Section with Text on Left & Image on Right -->
+    <div class="white">
+        <div class="text-section">
+            <h1>EcoVision</h1>
+            <div class="button-container">
+                <a href="buy.html">
+                <button class="btn">BUY
+                </button></a>
+                <a href="sell.html">
+                <button class="btn">SELL</button></a>
+            </div>
+        </div>
+        <div class="right-image">
+            <img src="pppp.jpg" alt="Recycling Process">
+        </div>
+    </div>
+
+</body>
+</html>
